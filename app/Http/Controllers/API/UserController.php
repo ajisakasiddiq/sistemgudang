@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -36,7 +38,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        ]);
+
+
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
+        return response()->json($user, 201);
     }
 
     /**
@@ -44,7 +56,13 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = User::find($id);
+
+        if ($data) {
+            return Response::json($data);
+        } else {
+            return Response::json(['message' => 'Data not found'], 404);
+        }
     }
 
     /**
@@ -60,7 +78,20 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = User::find($id);
+
+        if (!$data) {
+            return Response::json(['message' => 'Data not found'], 404);
+        }
+
+        $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $id,
+            // Validasi lainnya sesuai kebutuhan
+        ]);
+
+        $data->update($request->all());
+        return Response::json($data);
     }
 
     /**
@@ -68,6 +99,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = User::find($id);
+
+        if (!$data) {
+            return Response::json(['message' => 'Data not found'], 404);
+        }
+
+        $data->delete();
+        return Response::json(['message' => 'Data deleted successfully']);
     }
 }
