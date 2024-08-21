@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware();
+Route::get('/Login', function () {
+    return view('pages.sign-in');
+});
+Route::get('/Register', function () {
+    return view('pages.sign-up');
 });
