@@ -20,3 +20,12 @@ Route::get('/Login', function () {
 Route::get('/Register', function () {
     return view('pages.sign-up');
 });
+Route::get('/User', function () {
+    return view('pages.user');
+});
+Route::get('/Mutasi', function () {
+    return view('pages.mutasi');
+});
+Route::get('/Barang', function () {
+    return view('pages.barang');
+});
