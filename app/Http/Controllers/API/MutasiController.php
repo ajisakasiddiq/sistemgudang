@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Models\Mutasi;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class MutasiController extends Controller
 {
@@ -12,7 +14,12 @@ class MutasiController extends Controller
      */
     public function index()
     {
-        //
+        $mutasis = Mutasi::with(['user', 'barang'])->get();
+        return DataTables::of($mutasis)
+            ->addColumn('action', function ($mutasi) {
+                return '<a href="/barang/edit/' . $mutasi->id . '" class="btn btn-sm btn-primary">Edit</a>';
+            })
+            ->make(true);
     }
 
     /**

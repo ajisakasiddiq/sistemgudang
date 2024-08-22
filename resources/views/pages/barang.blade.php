@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Dashboard | Data Barang 
+    Data Barang
 @endsection
 
 @section('content')
@@ -9,198 +9,195 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>Authors table</h6>
+          <h6>Data Barang</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0">
-            <table class="table align-items-center mb-0">
+          <div class="table-responsive m-5 p-0">
+            <button class="btn btn-success mb-3" onclick="openAddModal()">Add Data</button>
+            <table id="barang" class="table table-striped" style="width:100%">
               <thead>
-                <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
-                  <th class="text-secondary opacity-7"></th>
-                </tr>
+                  <tr>
+                      <th>No</th>
+                      <th>Kode Barang</th>
+                      <th>Nama Barang</th>
+                      <th>Kategori</th>
+                      <th>Lokasi</th>
+                      <th>Action</th>
+                  </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">John Michael</h6>
-                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">Manager</p>
-                    <p class="text-xs text-secondary mb-0">Organization</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                        <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">Programator</p>
-                    <p class="text-xs text-secondary mb-0">Developer</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user3">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                        <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">Executive</p>
-                    <p class="text-xs text-secondary mb-0">Projects</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user4">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Michael Levi</h6>
-                        <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">Programator</p>
-                    <p class="text-xs text-secondary mb-0">Developer</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user5">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Richard Gran</h6>
-                        <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">Manager</p>
-                    <p class="text-xs text-secondary mb-0">Executive</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user6">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                        <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">Programtor</p>
-                    <p class="text-xs text-secondary mb-0">Developer</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+              <tbody></tbody>
+          </table>
           </div>
         </div>
       </div>
     </div>
   </div>
   </div>
+
+  {{-- add modal --}}
+  <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Tambah Data</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="dataForm">
+            <div class="mb-3">
+              <label for="inputName" class="form-label">Nama Barang</label>
+              <input type="text" class="form-control" id="inputName" required>
+            </div>
+            <div class="mb-3">
+              <label for="inputEmail" class="form-label">Kategori</label>
+              <input type="email" class="form-control" id="inputKategori" required>
+            </div>
+            <div class="mb-3">
+              <label for="inputEmail" class="form-label">Lokasi</label>
+              <input type="email" class="form-control" id="inputLokasi" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 @endsection
 @push('addon-script')
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Ambil CSRF token dari meta tag
+    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+    
+    // Set token CSRF untuk setiap permintaan AJAX
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': csrfToken
+      }
+    });
+
+    $('#barang').DataTable({
+      "ajax": {
+        "url": "api/barang",
+        "dataSrc": "data"
+      },
+      "columns": [
+        { 
+          "data": null, 
+          "render": function (data, type, row, meta) {
+            return meta.row + 1; // Menampilkan nomor urut
+          }
+        },
+        { "data": "kode" },       // Ganti "email" sesuai dengan field email dari API
+        { "data": "nama_barang" },          // Ganti "id" sesuai dengan field ID dari API
+        { "data": "kategori" },        // Ganti "name" sesuai dengan field name dari API
+        { "data": "lokasi" },        // Ganti "name" sesuai dengan field name dari API
+        {
+          "data": null,
+          "render": function(data, type, row) {
+            return `
+              <button class="btn btn-warning btn-sm" onclick="openEditModal(${row.id})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteRow(${row.id})">Delete</button>`;
+          }
+        }
+      ]
+    });
+  });
+
+  function openAddModal() {
+    $('#modalLabel').text('Tambah Data');
+    $('#dataForm')[0].reset(); // Reset form
+    $('#saveChanges').attr('onclick', 'saveData()');
+    $('#dataModal').modal('show');
+  }
+
+
+  function openEditModal(id) {
+    $('#modalLabel').text('Edit Data');
+    $('#dataForm')[0].reset(); 
+
+    $.ajax({
+      url: `api/barang/${id}`,
+      method: 'GET',
+      success: function(data) {
+        $('#inputName').val(data.nama_barang);
+        $('#inputKategori').val(data.kategori);
+        $('#inputLokasi').val(data.lokasi);
+        // Isi input lainnya sesuai dengan data
+      }
+    });
+
+    $('#saveChanges').attr('onclick', `updateData(${id})`); // Atur fungsi untuk update data
+    $('#dataModal').modal('show');
+  }
+
+  function saveData() {
+    const data = {
+      nama_barang: $('#inputName').val(),
+      kategori: $('#inputKategori').val(),
+      lokasi: $('#inputLokasi').val(),
+      // Ambil data input lainnya
+    };
+
+    $.ajax({
+      url: 'api/barang',
+      method: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function(response) {
+        $('#dataModal').modal('hide');
+        $('#barang').DataTable().ajax.reload(); // Reload DataTables untuk menampilkan data terbaru
+      },
+      error: function(xhr) {
+        console.error('Error:', xhr.responseText);
+      }
+    });
+  }
+
+  function updateData(id) {
+    const data = {
+      nama_barang: $('#inputName').val(),
+      kategori: $('#inputKategori').val(),
+      lokasi: $('#inputLokasi').val(),
+      // Ambil data input lainnya
+    };
+
+    $.ajax({
+      url: `api/barang/${id}`,
+      method: 'PUT',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function(response) {
+        $('#dataModal').modal('hide');
+        $('#barang').DataTable().ajax.reload(); // Reload DataTables untuk menampilkan data terbaru
+      },
+      error: function(xhr) {
+        console.error('Error:', xhr.responseText);
+      }
+    });
+  }
+  function deleteRow(id) {
+    if (confirm('Are you sure you want to delete this item?')) {
+      $.ajax({
+        url: `api/barang/${id}`,
+        method: 'DELETE',
+        success: function(response) {
+          $('#barang').DataTable().ajax.reload(); // Reload DataTables untuk menampilkan data terbaru
+          alert('Data deleted successfully');
+        },
+        error: function(xhr) {
+          console.error('Error:', xhr.responseText);
+          alert('Failed to delete data');
+        }
+      });
+    }
+  }
+</script>
 
 @endpush

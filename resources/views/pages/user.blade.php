@@ -189,7 +189,7 @@
         url: `api/users/${id}`,
         method: 'DELETE',
         success: function(response) {
-          $('#example').DataTable().ajax.reload(); // Reload DataTables untuk menampilkan data terbaru
+          $('#users').DataTable().ajax.reload(); // Reload DataTables untuk menampilkan data terbaru
           alert('Data deleted successfully');
         },
         error: function(xhr) {

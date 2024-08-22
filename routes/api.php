@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\BarangController;
+use App\Http\Controllers\API\MutasiController;
 use App\Http\Controllers\API\UserController;
 
 /*
@@ -22,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login', [AuthController::class, 'login']);
 Route::apiResource('users', UserController::class);
+Route::apiResource('barang', BarangController::class);
+Route::apiResource('mutasi', MutasiController::class);

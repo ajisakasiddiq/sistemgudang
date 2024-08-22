@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('kode')->unique();
             $table->string('kategori');
             $table->string('lokasi');
+            $table->string('stok');
             $table->timestamps();
         });
     }
