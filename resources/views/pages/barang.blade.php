@@ -77,10 +77,9 @@
 @push('addon-script')
 <script type="text/javascript">
   $(document).ready(function() {
-    // Ambil CSRF token dari meta tag
+
     const csrfToken = $('meta[name="csrf-token"]').attr('content');
-    
-    // Set token CSRF untuk setiap permintaan AJAX
+
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': csrfToken
@@ -96,14 +95,14 @@
         { 
           "data": null, 
           "render": function (data, type, row, meta) {
-            return meta.row + 1; // Menampilkan nomor urut
+            return meta.row + 1; 
           }
         },
-        { "data": "kode" },       // Ganti "email" sesuai dengan field email dari API
-        { "data": "nama_barang" },          // Ganti "id" sesuai dengan field ID dari API
-        { "data": "kategori" },        // Ganti "name" sesuai dengan field name dari API
-        { "data": "lokasi" },        // Ganti "name" sesuai dengan field name dari API
-        { "data": "stok" },        // Ganti "name" sesuai dengan field name dari API
+        { "data": "kode" },       
+        { "data": "nama_barang" },       
+        { "data": "kategori" },      
+        { "data": "lokasi" },        
+        { "data": "stok" },        
         {
           "data": null,
           "render": function(data, type, row) {
@@ -118,7 +117,7 @@
 
   function openAddModal() {
     $('#modalLabel').text('Tambah Data');
-    $('#dataForm')[0].reset(); // Reset form
+    $('#dataForm')[0].reset(); 
     $('#saveChanges').attr('onclick', 'saveData()');
     $('#dataModal').modal('show');
   }
@@ -136,11 +135,11 @@
         $('#inputKategori').val(data.kategori);
         $('#inputLokasi').val(data.lokasi);
         $('#inputStok').val(data.stok);
-        // Isi input lainnya sesuai dengan data
+       
       }
     });
 
-    $('#saveChanges').attr('onclick', `updateData(${id})`); // Atur fungsi untuk update data
+    $('#saveChanges').attr('onclick', `updateData(${id})`); 
     $('#dataModal').modal('show');
   }
 
@@ -150,7 +149,7 @@
       kategori: $('#inputKategori').val(),
       lokasi: $('#inputLokasi').val(),
       stok: $('#inputStok').val(),
-      // Ambil data input lainnya
+
     };
 
     $.ajax({
@@ -160,7 +159,7 @@
       contentType: 'application/json',
       success: function(response) {
         $('#dataModal').modal('hide');
-        $('#barang').DataTable().ajax.reload(); // Reload DataTables untuk menampilkan data terbaru
+        $('#barang').DataTable().ajax.reload(); 
       },
       error: function(xhr) {
         console.error('Error:', xhr.responseText);
@@ -174,7 +173,7 @@
       kategori: $('#inputKategori').val(),
       lokasi: $('#inputLokasi').val(),
       stok: $('#inputStok').val(),
-      // Ambil data input lainnya
+  
     };
 
     $.ajax({
@@ -184,7 +183,7 @@
       contentType: 'application/json',
       success: function(response) {
         $('#dataModal').modal('hide');
-        $('#barang').DataTable().ajax.reload(); // Reload DataTables untuk menampilkan data terbaru
+        $('#barang').DataTable().ajax.reload(); 
       },
       error: function(xhr) {
         console.error('Error:', xhr.responseText);
@@ -197,7 +196,7 @@
         url: `api/barang/${id}`,
         method: 'DELETE',
         success: function(response) {
-          $('#barang').DataTable().ajax.reload(); // Reload DataTables untuk menampilkan data terbaru
+          $('#barang').DataTable().ajax.reload(); 
           alert('Data deleted successfully');
         },
         error: function(xhr) {

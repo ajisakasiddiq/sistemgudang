@@ -70,10 +70,9 @@
 @push('addon-script')
 <script type="text/javascript">
   $(document).ready(function() {
-    // Ambil CSRF token dari meta tag
+
     const csrfToken = $('meta[name="csrf-token"]').attr('content');
-    
-    // Set token CSRF untuk setiap permintaan AJAX
+
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': csrfToken
@@ -89,12 +88,12 @@
         { 
           "data": null, 
           "render": function (data, type, row, meta) {
-            return meta.row + 1; // Menampilkan nomor urut
+            return meta.row + 1; 
           }
         },
-        { "data": "id" },          // Ganti "id" sesuai dengan field ID dari API
-        { "data": "email" },       // Ganti "email" sesuai dengan field email dari API
-        { "data": "name" },        // Ganti "name" sesuai dengan field name dari API
+        { "data": "id" },          
+        { "data": "email" },       
+        { "data": "name" },       
         {
           "data": null,
           "render": function(data, type, row) {
