@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Barang;
+use App\Models\Mutasi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class BarangController extends Controller
 {
@@ -16,7 +17,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barangs = Barang::select(['id', 'nama_barang', 'kode', 'kategori', 'lokasi', 'created_at', 'updated_at']);
+        $barangs = Barang::all();
         return DataTables::of($barangs)
             ->addColumn('action', function ($barang) {
                 return '<a href="/barang/edit/' . $barang->id . '" class="btn btn-sm btn-primary">Edit</a>';
@@ -36,10 +37,12 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'nama_barang' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
             'lokasi' => 'required|string|max:255',
+            'stok' => 'required|integer|min:1', // Stok harus integer dan minimal 1
         ]);
 
         // Ambil data input
@@ -63,8 +66,19 @@ class BarangController extends Controller
         // Simpan data barang
         $barang = Barang::create($data);
 
+        // Catat mutasi barang masuk
+        Mutasi::create([
+            'barang_id' => $barang->id,
+            // 'user_id' => auth()->id(),
+            'user_id' => '1',
+            'tanggal' => now(),
+            'jenis_mutasi' => 'masuk',
+            'jumlah' => $data['stok'], // Gunakan stok dari input
+        ]);
+
         return response()->json($barang, 201);
     }
+
 
 
     /**

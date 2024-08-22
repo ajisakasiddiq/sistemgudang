@@ -13,8 +13,18 @@
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive m-5 p-0">
+            
             {{-- <button class="btn btn-success mb-3" onclick="openAddModal()">Add Data</button> --}}
             <table id="mutasi" class="table table-striped" style="width:100%">
+              <div class="row">
+                <div class="col-2">
+                    <select class="form-control" name="kelas" id="kelas">
+                        <option value="">Jenis Mutasi</option>
+                        <option value="Masuk">Masuk</option>
+                        <option value="Keluar">Keluar</option>
+                    </select>
+                </div>
+            </div>
               <thead>
                   <tr>
                       <th>No</th>
@@ -97,7 +107,9 @@
         },
         { "data": "tanggal" },       // Ganti "email" sesuai dengan field email dari API
         { "data": "user.name" },        // Ganti "name" sesuai dengan field name dari API
-        { "data": "barang.nama_barang" },        // Ganti "name" sesuai dengan field name dari API
+        { "data": function(row) {
+            return row.barang.nama_barang + ' (' + row.barang.kode + ')';
+        }},       // Ganti "name" sesuai dengan field name dari API
         { "data": "jenis_mutasi" },          // Ganti "id" sesuai dengan field ID dari API
         { "data": "jumlah" },        // Ganti "name" sesuai dengan field name dari API
         // {

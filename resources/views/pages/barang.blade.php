@@ -22,6 +22,7 @@
                       <th>Nama Barang</th>
                       <th>Kategori</th>
                       <th>Lokasi</th>
+                      <th>Stok</th>
                       <th>Action</th>
                   </tr>
               </thead>
@@ -57,6 +58,10 @@
             <div class="mb-3">
               <label for="inputEmail" class="form-label">Lokasi</label>
               <input type="email" class="form-control" id="inputLokasi" required>
+            </div>
+            <div class="mb-3">
+              <label for="inputEmail" class="form-label">Stok</label>
+              <input type="email" class="form-control" id="inputStok" required>
             </div>
           </form>
         </div>
@@ -98,6 +103,7 @@
         { "data": "nama_barang" },          // Ganti "id" sesuai dengan field ID dari API
         { "data": "kategori" },        // Ganti "name" sesuai dengan field name dari API
         { "data": "lokasi" },        // Ganti "name" sesuai dengan field name dari API
+        { "data": "stok" },        // Ganti "name" sesuai dengan field name dari API
         {
           "data": null,
           "render": function(data, type, row) {
@@ -129,6 +135,7 @@
         $('#inputName').val(data.nama_barang);
         $('#inputKategori').val(data.kategori);
         $('#inputLokasi').val(data.lokasi);
+        $('#inputStok').val(data.stok);
         // Isi input lainnya sesuai dengan data
       }
     });
@@ -142,6 +149,7 @@
       nama_barang: $('#inputName').val(),
       kategori: $('#inputKategori').val(),
       lokasi: $('#inputLokasi').val(),
+      stok: $('#inputStok').val(),
       // Ambil data input lainnya
     };
 
@@ -165,6 +173,7 @@
       nama_barang: $('#inputName').val(),
       kategori: $('#inputKategori').val(),
       lokasi: $('#inputLokasi').val(),
+      stok: $('#inputStok').val(),
       // Ambil data input lainnya
     };
 
