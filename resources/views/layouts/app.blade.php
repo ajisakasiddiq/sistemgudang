@@ -99,6 +99,32 @@
     @stack('prepend-script')
     @include('includes.script')
     @stack('addon-script')
+    <script>
+        $(document).ready(function() {
+    $('#logoutButton').click(function() {
+        // Hapus token otentikasi dari localStorage atau sessionStorage
+        localStorage.removeItem('auth_token');
+        sessionStorage.removeItem('auth_token');
+        sessionStorage.removeItem('name');
+        sessionStorage.removeItem('email');
+
+        // Redirect ke halaman login
+        window.location.href = '/Login';
+    });
+
+});
+
+        $(document).ready(function() {
+            var name = localStorage.getItem('name') || sessionStorage.getItem('name');
+
+            if (name) {
+                $('#usernameDisplay').text(name);
+            } else {
+                $('#usernameDisplay').text('Guest');
+            }
+        });
+
+    </script>
 </body>
 
 </html>

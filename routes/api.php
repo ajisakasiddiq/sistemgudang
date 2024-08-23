@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout']);
 Route::apiResource('users', UserController::class);
 Route::apiResource('barang', BarangController::class);
 Route::apiResource('mutasi', MutasiController::class);

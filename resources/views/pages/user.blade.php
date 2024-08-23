@@ -72,10 +72,15 @@
   $(document).ready(function() {
 
     const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
+    const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+    if (!token) {
+        // Pengguna sudah login, redirect ke halaman utama atau dashboard
+        window.location.href = '/Login';
+    }
     $.ajaxSetup({
       headers: {
-        'X-CSRF-TOKEN': csrfToken
+        'X-CSRF-TOKEN': csrfToken,
+        'Authorization': 'Bearer ' + token,
       }
     });
 

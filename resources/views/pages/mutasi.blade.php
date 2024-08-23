@@ -14,7 +14,7 @@
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive m-5 p-0">
            <table id="mutasi" class="table table-striped" style="width:100%">
-              <div class="row">
+              {{-- <div class="row">
                 <div class="col-2">
                     <select class="form-control" name="kelas" id="kelas">
                         <option value="">Jenis Mutasi</option>
@@ -22,7 +22,7 @@
                         <option value="Keluar">Keluar</option>
                     </select>
                 </div>
-            </div>
+            </div> --}}
               <thead>
                   <tr>
                       <th>No</th>
@@ -46,10 +46,15 @@
 <script type="text/javascript">
   $(document).ready(function() {
     const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
+    const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+    if (!token) {
+        // Pengguna sudah login, redirect ke halaman utama atau dashboard
+        window.location.href = '/Login';
+    }
     $.ajaxSetup({
       headers: {
-        'X-CSRF-TOKEN': csrfToken
+        'X-CSRF-TOKEN': csrfToken,
+        'Authorization': 'Bearer ' + token,
       }
     });
 

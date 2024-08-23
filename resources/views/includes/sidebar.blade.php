@@ -41,6 +41,32 @@
             <span class="nav-link-text ms-1">Mutasi</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Account</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-02 text-danger text-sm opacity-10"></i> <!-- Ganti dengan ikon pengguna -->
+            </div>
+            <span id="usernameDisplay" class="nav-link-text ms-1">Nama user</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void(0);" id="logoutButton" class="nav-link">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-user-run text-danger text-sm opacity-10"></i> <!-- Ganti dengan ikon logout -->
+            </div>
+            <span id="usernameDisplay" class="nav-link-text ms-1">Logout</span>
+          </a>
+        </li>        
+
+        
       </ul>
     </div>
   </aside>

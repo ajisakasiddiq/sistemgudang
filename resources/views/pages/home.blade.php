@@ -169,5 +169,11 @@ background-size: cover;">
     </div>
 @endsection
 @push('addon-script')
-
+<script>
+     var authToken = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+      if (!authToken) {
+        // Pengguna sudah login, redirect ke halaman utama atau dashboard
+        window.location.href = '/Login';
+    }
+</script>
 @endpush

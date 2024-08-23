@@ -4,6 +4,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
@@ -13,11 +14,11 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
+  <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
@@ -58,28 +59,28 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form" id="loginForm">
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email">
+                      <input type="email" id="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" required>
                     </div>
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" required>
                     </div>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe">
                       <label class="form-check-label" for="rememberMe">Remember me</label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                      <button type="button" id="signInButton" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
                     </div>
-                  </form>
+                  </form>                                  
                 </div>
-                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Don't have an account?
                     <a href="/Register" class="text-primary text-gradient font-weight-bold">Sign up</a>
                   </p>
-                </div>
+                </div> --}}
               </div>
             </div>
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
@@ -94,11 +95,70 @@
       </div>
     </section>
   </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+ $(document).ready(function() {
+  
+     const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': csrfToken
+      }
+    });
+
+    var authToken = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+
+    if (authToken) {
+        // Pengguna sudah login, redirect ke halaman utama atau dashboard
+        window.location.href = '/';
+    }
+
+
+    $('#signInButton').click(function() {
+      console.log('Button clicked!');
+        // Ambil data dari form
+        var email = $('#email').val();
+        var password = $('#password').val();
+        var rememberMe = $('#rememberMe').is(':checked');
+        if (!email || !password) {
+            alert('Email dan Password wajib diisi.');
+            return;
+        }
+        var payload = {
+            email: email,
+            password: password
+        };
+        $.ajax({
+          url: '/api/login', // Coba gunakan '/' di depan 'api/login' jika itu rutenya
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(payload),
+          success: function(data) {
+              if (rememberMe) {
+                  localStorage.setItem('auth_token', data.access_token);
+              } else {
+                  sessionStorage.setItem('auth_token', data.access_token);
+              }
+              sessionStorage.setItem('name', data.user.name)
+              sessionStorage.setItem('email', data.user.email)              
+              window.location.href = '/';
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              var errorMessage = jqXHR.responseJSON && jqXHR.responseJSON.message ? jqXHR.responseJSON.message : 'Login gagal!';
+              console.error('Error:', errorMessage);
+          }
+      });
+    });
+});
+
+</script>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
+  <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -111,7 +171,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script src="/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
 
 </html>
