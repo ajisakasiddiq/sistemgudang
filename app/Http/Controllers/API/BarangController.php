@@ -42,7 +42,7 @@ class BarangController extends Controller
             'nama_barang' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
             'lokasi' => 'required|string|max:255',
-            'stok' => 'required|integer|min:1', // Stok harus integer dan minimal 1
+            'stok' => 'required|integer|min:1',
         ]);
 
         // Ambil data input
@@ -69,8 +69,7 @@ class BarangController extends Controller
         // Catat mutasi barang masuk
         Mutasi::create([
             'barang_id' => $barang->id,
-            // 'user_id' => auth()->id(),
-            'user_id' => '1',
+            'user_id' => $data['user_id'],
             'tanggal' => now(),
             'jenis_mutasi' => 'masuk',
             'jumlah' => $data['stok'], // Gunakan stok dari input
@@ -111,19 +110,40 @@ class BarangController extends Controller
         $data = Barang::find($id);
 
         if (!$data) {
-            return Response::json(['message' => 'Data not found'], 404);
+            return response()->json(['message' => 'Data not found'], 404);
         }
 
         $request->validate([
             'nama_barang' => 'required|string|max:255',
-            'kode' => 'sometimes|required|string|email|max:255|unique:barang,kode,' . $id,
+            'kode' => 'sometimes|required|string|max:255|unique:barang,kode,' . $id,
             'kategori' => 'required|string|max:255',
             'lokasi' => 'required|string|max:255',
+            'stok' => 'sometimes|required|integer|min:0', // Validasi untuk stok jika di-update
         ]);
 
+        $originalStok = $data->stok;
+        $updatedStok = $request->input('stok', $originalStok);
+
+        // Update data barang
         $data->update($request->all());
-        return Response::json($data);
+
+        // Jika stok berubah, catat mutasi
+        if ($originalStok != $updatedStok) {
+            $jenisMutasi = $updatedStok < $originalStok ? 'keluar' : 'masuk';
+            $jumlahMutasi = abs($updatedStok - $originalStok);
+
+            Mutasi::create([
+                'user_id' => $data['user_id'],
+                'barang_id' => $data->id,
+                'tanggal' => now(),
+                'jenis_mutasi' => $jenisMutasi,
+                'jumlah' => $jumlahMutasi,
+            ]);
+        }
+
+        return response()->json($data);
     }
+
 
     /**
      * Remove the specified resource from storage.

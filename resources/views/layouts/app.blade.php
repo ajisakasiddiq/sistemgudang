@@ -105,6 +105,7 @@
         // Hapus token otentikasi dari localStorage atau sessionStorage
         localStorage.removeItem('auth_token');
         sessionStorage.removeItem('auth_token');
+        sessionStorage.removeItem('id');
         sessionStorage.removeItem('name');
         sessionStorage.removeItem('email');
 

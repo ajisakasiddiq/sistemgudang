@@ -154,8 +154,10 @@
       kategori: $('#inputKategori').val(),
       lokasi: $('#inputLokasi').val(),
       stok: $('#inputStok').val(),
-
+      user_id: $('#inputUserId').val(),
+      user_id: sessionStorage.getItem('id'),
     };
+console.log(data);
 
     $.ajax({
       url: 'api/barang',
@@ -178,7 +180,7 @@
       kategori: $('#inputKategori').val(),
       lokasi: $('#inputLokasi').val(),
       stok: $('#inputStok').val(),
-  
+      user_id: sessionStorage.getItem('id'),
     };
 
     $.ajax({

@@ -141,6 +141,7 @@
               } else {
                   sessionStorage.setItem('auth_token', data.access_token);
               }
+              sessionStorage.setItem('id', data.user.id)
               sessionStorage.setItem('name', data.user.name)
               sessionStorage.setItem('email', data.user.email)              
               window.location.href = '/';
