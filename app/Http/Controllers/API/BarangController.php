@@ -108,7 +108,6 @@ class BarangController extends Controller
     public function update(Request $request, string $id)
     {
         $data = Barang::find($id);
-
         if (!$data) {
             return response()->json(['message' => 'Data not found'], 404);
         }
@@ -133,7 +132,8 @@ class BarangController extends Controller
             $jumlahMutasi = abs($updatedStok - $originalStok);
 
             Mutasi::create([
-                'user_id' => $data['user_id'],
+                // 'user_id' => $data['user_id'],
+                'user_id' => $request->input('user_id'),
                 'barang_id' => $data->id,
                 'tanggal' => now(),
                 'jenis_mutasi' => $jenisMutasi,

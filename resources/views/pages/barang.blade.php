@@ -189,6 +189,7 @@ console.log(data);
       data: JSON.stringify(data),
       contentType: 'application/json',
       success: function(response) {
+        alert("Update Berhasil")
         $('#dataModal').modal('hide');
         $('#barang').DataTable().ajax.reload(); 
       },
